@@ -25,7 +25,7 @@ function Mainpage() {
             </div>
             <div className="mt-10 mr-20 text-sm">
               <div>DAJOBA AI 맞춤형 모델은 모든 채용공고를 분석하여 </div>
-              <div>나의 자소서와 가장 적합한 채용공고를 추천해주는 서비스를 제공합니다..</div>
+              <div>나의 자소서와 가장 적합한 채용공고를 추천해주는 서비스를 제공합니다.</div>
             </div>
           </div>
         </div>
