@@ -19,7 +19,7 @@ function Coverletterlist() {
                         rows="1"
                         name="message"
                         id="message"
-                        placeholder="ex)한국사 2급, 컴활 1급, 정보처리기사 이런식으로 입력해주세요"
+                        placeholder="ex)한국사 1급, 컴활 2급, 정보처리기사 이런식으로 입력해주세요"
                         className="w-1/3 ml-24 resize-none rounded-md border border-[#e0e0e0] bg-white py-1 px-2 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
                     ></textarea>
                 </div>
