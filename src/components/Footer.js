@@ -1,6 +1,6 @@
 function Footer() {
   return(
-    <div className="ml-20 mr-20 bg-slate-100">
+    <div className=" pl-24 text-sm bg-gray-100">
       <ul className="container flex gap-10">
         <li>DAJOBA Inc</li>
         <li>개인정보</li> 
