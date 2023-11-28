@@ -10,8 +10,8 @@ function Nav() {
       </div>
       <div className="flex md:flex md:justify-between">
         <ul className="flex gap-10 ml-20 pl-10">
-          <Link to="/Openrecruitment"><li>채용</li></Link>
-          <Link to="/Recruitment"><li>공채</li></Link>
+          <Link to="/Recruitment"><li>채용</li></Link>
+          <Link to="/Openrecruitment"><li>공채</li></Link>
           <Link to="/Coverletterlist"><li>자기소개서</li></Link>
           <Link to="/Introduce"><li>소개</li></Link>
         </ul>
