@@ -2,12 +2,13 @@ import React from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import Checkbox from '../components/Checkbox';
+import Boardlist from '../components/Boardlist';
 
 function Coverletterlist() {
     return (
         <div>
             <Nav />
-            <div className="mr-24 ml-24 mb-4">
+            <div className="mr-24 ml-24 mt-10 mb-4">
                 <div className="mb-2 pl-4">* 최종학력</div>
                 <Checkbox checkboxNames={['고등학교 졸업', '전문학사(2년제 전문대학)', '학사(4년제 졸업)', '석사', '박사']} />
             </div>
@@ -26,6 +27,14 @@ function Coverletterlist() {
             <div className="mr-24 ml-24 mb-4">
                 <div className="pl-4 pb-2">* 경력</div>
                 <Checkbox checkboxNames={['1년미만', '1~3년', '3~5년', '5년이상']} />
+            </div>
+            <div className="text-center">
+            <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded ">
+          저장
+        </button>
+        </div>
+            <div>
+                <Boardlist />
             </div>
             <Footer />
         </div>

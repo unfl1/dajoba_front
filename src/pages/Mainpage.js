@@ -7,6 +7,7 @@ import work1 from '../assets/work1.jpg';
 import work2 from '../assets/work2.jpg';
 import work3 from '../assets/work3.jpg';
 import work4 from '../assets/work4.jpg';
+import {Link} from 'react-router-dom';
 
 function Mainpage() {
   return (
@@ -29,8 +30,8 @@ function Mainpage() {
             </div>
           </div>
         </div>
-        <div className=" mt-10 bg-purple-200 pr-4 pl-4 ml-24 mr-24 grid grid-cols-3 h-1/6 gap-20 rounded ">
-          <button className="bg-white text-purple-600 mt-24 mb-24 ml-24 mr-16 px-6 py-2 mx-4 hover:bg-white rounded place-self-center font-bold">분석시작</button>
+        <div className=" mt-10 bg-purple-200 pr-4 pl-4 ml-48 mr-48 grid grid-cols-3 h-1/6 gap-20 rounded ">
+        <Link to="/Coverletterlist"><button className="bg-white text-purple-600 mt-24 mb-24 ml-24 mr-16 px-6 py-2 mx-4 hover:bg-white rounded place-self-center font-bold">분석시작</button></ Link>
           <div className="place-self-center">
             <div>자소서를 분석해</div>
             <div>채용공고와 매칭해 드려요</div>

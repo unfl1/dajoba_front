@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Card from './Card'; // Card 컴포넌트 임포트
 import Pagination from './Pagination'; // Pagination 컴포넌트 임포트
 
-class Orlsection extends Component {
+class Rmboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,7 @@ class Orlsection extends Component {
 
   renderCards() {
     const cards = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 30; i++) {
       cards.push(
         <div key={i}><Card /></div>
       );
@@ -29,10 +29,9 @@ class Orlsection extends Component {
     const { currentPage, totalPages } = this.state;
 
     return (
-      <div className="bg-gray-100">
-      <div className="ml-28 mr-28 mb-12">
-        <div className="font-semibold text-xl mr-4 ml-6 mb-10 pt-8">이번주 공채 소식</div>
-        <div className="grid grid-cols-4 grid-flow-row gap-4">
+      <div >
+      <div className="mr-4 ml-4 gap-2">
+        <div className="grid grid-cols-3 grid-flow-row gap-4">
           {this.renderCards()}
         </div >
         <div className="pt-3 pb-3 ">
@@ -48,4 +47,4 @@ class Orlsection extends Component {
   }
 }
 
-export default Orlsection;
+export default Rmboard;

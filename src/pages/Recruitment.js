@@ -4,11 +4,15 @@ import Footer from '../components/Footer';
 import Board2 from '../components/Board2';
 
 function Recruitment() {
-    return(
+    return (
         <div>
             <Nav />
-            <div className="ml-24 mr-24">
-            <Board2 />
+            <div className="bg-gray-100">
+            <div>
+                <div className="ml-12 mr-12 mt-10 ">
+                    <Board2 />
+                </div>
+                </div>
             </div>
             <Footer />
         </div>
