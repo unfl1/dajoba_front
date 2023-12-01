@@ -16,7 +16,7 @@ function Checkbox({ checkboxNames }) {
   return (
     <div className="flex flex-wrap">
       {checkboxes.map((checkbox, index) => (
-        <div key={index} className="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
+        <div key={index} className="mb-[0.25rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
           <input
             className="... (테일윈드 CSS 클래스 삽입)"
             type="checkbox"
@@ -24,7 +24,7 @@ function Checkbox({ checkboxNames }) {
             checked={checkbox.checked}
             onChange={() => handleCheckboxChange(index)}
           />
-          <label className="inline-block pl-[0.15rem] hover:cursor-pointer" htmlFor={`inlineCheckbox${index}`}>
+          <label className="inline-block pl-[0.3rem] hover:cursor-pointer" htmlFor={`inlineCheckbox${index}`}>
             {checkbox.name}
           </label>
         </div>

@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily:{
+      Noto:["Noto Sans KR", "sans-serif"]
+    },
     screens: {
       'sm': '640px',
       // => @media (min-width: 640px) { ... }

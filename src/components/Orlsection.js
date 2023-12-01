@@ -30,19 +30,19 @@ class Orlsection extends Component {
 
     return (
       <div className="bg-gray-100">
-      <div className="ml-28 mr-28 mb-12">
-        <div className="font-semibold text-xl mr-4 ml-6 mb-10 pt-8">이번주 공채 소식</div>
-        <div className="grid grid-cols-4 grid-flow-row gap-4">
-          {this.renderCards()}
-        </div >
-        <div className="pt-3 pb-3 ">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={this.handlePageChange}
-        />
+        <div className="ml-28 mr-28 pb-4">
+          <div className="font-semibold text-xl mr-4 ml-6 mb-10 pt-8">이번주 공채 소식</div>
+          <div className="grid grid-cols-4 grid-flow-row gap-4">
+            {this.renderCards()}
+          </div >
+          <div className="pt-3 pb-3 ">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={this.handlePageChange}
+            />
+          </div>
         </div>
-      </div>
       </div>
     );
   }
