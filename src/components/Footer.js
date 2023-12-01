@@ -1,3 +1,5 @@
+//global footer
+
 function Footer() {
   return(
     <div className=" pl-24 text-sm bg-gray-100">

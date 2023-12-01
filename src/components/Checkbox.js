@@ -1,3 +1,5 @@
+//다량의 체크박스 만듬
+
 import React, { useState } from 'react';
 
 function Checkbox({ checkboxNames }) {

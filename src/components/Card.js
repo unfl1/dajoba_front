@@ -1,3 +1,5 @@
+//공채나 채용 칸 하나하나를 card로 만들어봄
+
 import React, { Component } from 'react';
 
 class Card extends Component {

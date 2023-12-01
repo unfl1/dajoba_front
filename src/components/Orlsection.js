@@ -1,3 +1,5 @@
+//공채쪽 카드로 만든 게시물들
+
 import React, { Component } from 'react';
 import Card from './Card'; // Card 컴포넌트 임포트
 import Pagination from './Pagination'; // Pagination 컴포넌트 임포트

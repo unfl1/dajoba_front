@@ -1,3 +1,5 @@
+//회원가입 페이지
+
 import { Link } from 'react-router-dom';
 
 function Account() {

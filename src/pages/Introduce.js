@@ -1,3 +1,5 @@
+//홈페이지 약간 소개 느낌
+
 import React from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';

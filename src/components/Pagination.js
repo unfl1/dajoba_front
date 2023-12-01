@@ -1,3 +1,5 @@
+//이전 12345 다음 같은 페이지 옮겨다니는거 구현
+
 import React from 'react';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {

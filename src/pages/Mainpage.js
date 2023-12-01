@@ -1,3 +1,5 @@
+//메인화면
+
 import React from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
@@ -7,7 +9,7 @@ import work1 from '../assets/work1.jpg';
 import work2 from '../assets/work2.jpg';
 import work3 from '../assets/work3.jpg';
 import work4 from '../assets/work4.jpg';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Mainpage() {
   return (
@@ -30,13 +32,17 @@ function Mainpage() {
             </div>
           </div>
         </div>
-        <div className=" mt-10 bg-purple-200 pr-4 pl-4 ml-48 mr-48 grid grid-cols-3 h-1/6 gap-20 rounded ">
-        <Link to="/Coverletterlist"><button className="bg-white text-purple-600 mt-24 mb-24 ml-24 mr-16 px-6 py-2 mx-4 hover:bg-white rounded place-self-center font-bold">분석시작</button></ Link>
+        <div className="mt-10 bg-purple-200 pr-4 pl-4 ml-64 mr-64 grid grid-cols-3 md:h-1/6 gap-20 rounded ">
+          <div className="col-span-1  flex justify-self-end items-center">
+            <Link to="/Coverletterlist">
+              <button className="bg-white text-purple-600 px-4 py-2 mx-4 rounded font-bold">분석시작</button>
+            </Link>
+          </div>
           <div className="place-self-center">
             <div>자소서를 분석해</div>
             <div>채용공고와 매칭해 드려요</div>
           </div>
-          <img src={picture1} alt="" className="h-40 object-center hidden md:flex items-center space-x-1 mt-6"></img>
+          <img src={picture1} alt="" className="h-40 object-center hidden md:flex justify-self-start items-center space-x-1 mt-6"></img>
         </div>
         <div className="ml-24 mb-20 mr-24 mt-16">
           <div className="pl-4 "># 최신 공채</div>

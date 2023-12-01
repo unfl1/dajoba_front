@@ -1,3 +1,5 @@
+//자기소개서 쓰는 칸
+
 import React, { useState } from 'react';
 
 const Board = () => {

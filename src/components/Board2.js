@@ -1,3 +1,5 @@
+//자기소개서 목록 위에 추가로 받을 유저 정보
+
 import React, { useState } from 'react';
 import Rmboard from './Rmboard';
 
@@ -15,7 +17,7 @@ const Board2 = () => {
     <div className="flex">
       <div className="w-64 flex-shrink-0 p-4 ">
         <div className="mb-4">
-          <div className="text-lg font-medium text-gray-700 mb-2">
+          <div className="text-lg font-semibold text-gray-700 mb-2">
             직군별 분류
           </div>
           {categories.map((category, index) => (
