@@ -8,6 +8,8 @@ import Coverletter from './pages/Coverletter';
 import Openrecruitment from './pages/Openrecruitment';
 import Recruitment from './pages/Recruitment';
 import Introduce from './pages/Introduce';
+import Analyze from './pages/Analyze';
+import Notfoundpage from './pages/Notfoundpage';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
       <Route path="Openrecruitment" element={<Openrecruitment/>}/>
       <Route path="Recruitment" element={<Recruitment/>}/>
       <Route path="Introduce" element={<Introduce/>}/>
+      <Route path="Analyze" element={<Analyze/>}/>
+      <Route path="Notfoundpage" element={<Notfoundpage/>}/>
     </Routes>
 
     </BrowserRouter>

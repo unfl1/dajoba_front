@@ -17,7 +17,7 @@ const Board2 = () => {
     <div className="flex">
       <div className="w-64 flex-shrink-0 p-4 ">
         <div className="mb-4">
-          <div className="text-lg font-semibold text-gray-700 mb-2">
+          <div className="text-lg font-semibold text-gray-700 pb-8">
             직군별 분류
           </div>
           {categories.map((category, index) => (

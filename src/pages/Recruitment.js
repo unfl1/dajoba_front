@@ -10,7 +10,7 @@ function Recruitment() {
         <div>
             <Nav />
             <div className="bg-gray-100">            
-                <div className="ml-12 mr-12 mt-10 ">
+                <div className="ml-12 mr-12 pt-4 ">
                     <Board2 />
                 </div>                
             </div>

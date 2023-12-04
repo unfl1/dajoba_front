@@ -32,7 +32,7 @@ function Mainpage() {
             </div>
           </div>
         </div>
-        <div className="mt-10 bg-purple-200 pr-4 pl-4 ml-64 mr-64 grid grid-cols-3 md:h-1/6 gap-20 rounded ">
+        <div className="mt-10 bg-purple-100 pr-4 pl-4 ml-64 mr-64 grid grid-cols-3 md:h-1/6 gap-20 rounded ">
           <div className="col-span-1  flex justify-self-end items-center">
             <Link to="/Coverletterlist">
               <button className="bg-white text-purple-600 px-4 py-2 mx-4 rounded font-bold">분석시작</button>

@@ -26,7 +26,7 @@ function Coverletterlist() {
                     저장
                 </button>
             </div>
-            <div className="mt-24">
+            <div className="mt-24 ">
                 <Boardlist />
             </div>
             <Footer />

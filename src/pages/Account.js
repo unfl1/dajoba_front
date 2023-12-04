@@ -1,24 +1,75 @@
-//회원가입 페이지
-
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Account() {
+  const [formData, setFormData] = useState({
+    id: '',
+    password: '',
+    confirm: '',
+  });
+
+  const [passwordMatch, setPasswordMatch] = useState(true);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  
+    if (name === 'password' || name === 'confirm') {
+      const passwordValue = name === 'password' ? value : formData.password;
+      const confirmPasswordValue = name === 'confirm' ? value : formData.confirm;
+      setPasswordMatch(passwordValue === confirmPasswordValue);
+    }
+  };
+
   return (
-    <div className=" bg-gray-200 flex justify-center items-center">
+    <div className="bg-gray-200 flex justify-center items-center">
       <div className="lg:w-2/5 md:w-1/2 w-2/3 mt-8 mb-8">
         <form className="bg-white p-10 rounded-lg shadow-lg min-w-full">
-          <Link to ='/'><h1 className="text-center text-2xl mb-6 text-gray-600 font-bold font-sans">DAJOBA</h1></Link>
+          <Link to="/">
+            <h1 className="text-center text-2xl mb-6 text-gray-600 font-bold font-sans">DAJOBA</h1>
+          </Link>
           <div>
-            <label className="text-gray-800 font-semibold block my-3 text-md" for="id">아이디</label>
-            <input className="w-full bg-gray-100 px-2 py-1 rounded-lg focus:outline-none" type="text" name="id" id="id" placeholder="ID" />
+            <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="id">아이디</label>
+            <input
+              className="w-full bg-gray-100 px-2 py-1 rounded-lg focus:outline-none"
+              type="text"
+              name="id"
+              id="id"
+              placeholder="ID"
+              onChange={handleChange}
+              required
+            />
           </div>
           <div>
-            <label className="text-gray-800 font-semibold block my-3 text-md" for="password">비밀번호</label>
-            <input className="w-full bg-gray-100 px-2 py-1 rounded-lg focus:outline-none" type="text" name="password" id="password" placeholder="********" />
+            <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="password">비밀번호</label>
+            <input
+              className="w-full bg-gray-100 px-2 py-1 rounded-lg focus:outline-none"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="********"
+              onChange={handleChange}
+              required
+            />
           </div>
           <div>
-            <label className="text-gray-800 font-semibold block my-3 text-md" for="confirm">비밀번호 확인</label>
-            <input className="w-full bg-gray-100 px-2 py-1 rounded-lg focus:outline-none" type="text" name="confirm" id="confirm" placeholder="********" />
+            <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="confirm">비밀번호 확인</label>
+            <input
+              className={`w-full bg-gray-100 px-2 py-1 rounded-lg focus:outline-none ${
+                passwordMatch ? 'text-green-500' : 'text-red-500'
+              }`}
+              type="password"
+              name="confirm"
+              id="confirm"
+              placeholder="********"
+              onChange={handleChange}
+              required
+            />
+            {!passwordMatch && <p className="text-red-500">불일치합니다</p>}
+            {passwordMatch && <p className="text-green-500">일치합니다</p>}
           </div>
           <div>
             <label className="text-gray-800 font-semibold block my-3 text-md" for="name">이름</label>
@@ -40,12 +91,24 @@ function Account() {
             <label className="text-gray-800 font-semibold block my-3 text-md" for="email">Email</label>
             <input className="w-full bg-gray-100 px-2 py-1 rounded-lg focus:outline-none" type="text" name="email" id="email" placeholder="daboja7@gmail.com" />
           </div>
-          <button type="submit" className="w-full mt-6 bg-purple-600 rounded-lg px-2 py-1 text-lg text-white tracking-wide font-semibold font-sans">회원가입</button>
-          <Link to ='/Login'><button type="login" className="w-full mt-6 mb-3 bg-indigo-100 rounded-lg px-2 py-1 text-lg text-gray-800 tracking-wide font-semibold font-sans">로그인</button></Link>
+          <button
+            type="submit"
+            className="w-full mt-6 bg-purple-600 rounded-lg px-2 py-1 text-lg text-white tracking-wide font-semibold font-sans"
+          >
+            회원가입
+          </button>
+          <Link to="/Login">
+            <button
+              type="login"
+              className="w-full mt-6 mb-3 bg-indigo-100 rounded-lg px-2 py-1 text-lg text-gray-800 tracking-wide font-semibold font-sans"
+            >
+              로그인
+            </button>
+          </Link>
         </form>
       </div>
     </div>
   );
-};
+}
 
 export default Account;
