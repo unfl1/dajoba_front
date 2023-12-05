@@ -13,7 +13,7 @@ function Mainpage() {
     <div className="h-100% w">
       <Nav />
       <div>
-        <div className="grid grid-cols-2 bg-gray-100  gap-4">
+        <div className="grid grid-cols-2 bg-purple-100  gap-4">
           <div className="text-center">
             <img src={intro} alt="" className="mt-10 mb-10 h-3/4 w-3/4 inline object-center object-contain"></img>
           </div>
@@ -29,7 +29,7 @@ function Mainpage() {
             </div>
           </div>
         </div>
-        <div className="mt-10 bg-purple-100 pr-4 pl-4 ml-64 mr-64 grid grid-cols-3 md:h-1/6 gap-20 rounded ">
+        <div className="mt-10 bg-gray-100 pr-4 pl-4 ml-64 mr-64 grid grid-cols-3 md:h-1/6 gap-20 rounded ">
           <div className="col-span-1  flex justify-self-end items-center">
             <Link to="/Coverletterlist">
               <button className="bg-white text-purple-600 px-4 py-2 mx-4 rounded font-bold">분석시작</button>
@@ -39,7 +39,7 @@ function Mainpage() {
             <div>자소서를 분석해</div>
             <div>채용공고와 매칭해 드려요</div>
           </div>
-          <img src={picture1} alt="" className="h-40 object-center hidden md:flex justify-self-start items-center space-x-1 mt-6"></img>
+          <img src={picture1} alt="" className="h-2/3  hidden md:flex  space-x-1 mt-6"></img>
         </div>
       </div>
       <Fourrecruit />
