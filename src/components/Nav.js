@@ -8,6 +8,7 @@ import logo from '../assets/logo.png';
 function Nav() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  const user = useSelector(state => state.user.user); // 유저 정보 가져오기
 
   const handleLogout = () => {
     dispatch(logout());
@@ -22,17 +23,17 @@ function Nav() {
       </div>
       <div className="flex md:flex md:justify-between">
         <ul className="flex gap-10 ml-20 pl-10">
-          <Link to="/Recruitment"><li>채용</li></Link>
-          <Link to="/Openrecruitment"><li>공채</li></Link>
+          <Link to="/Recruitment"><li>채용</li></Link>          
           <Link to="/Coverletterlist"><li>자기소개서</li></Link>
           <Link to="/Introduce"><li>소개</li></Link>
         </ul>
         <ul className="hidden md:flex items-center space-x-1 gap-5 mr-20 pr-10">
           {isLoggedIn ? (
-            // 로그인 상태일 때 로그아웃 버튼 표시
-            <li><button onClick={handleLogout}>로그아웃</button></li>
+            <>
+              <li>{user.username}님 안녕하세요!</li> {/* 유저 아이디 출력 */}
+              <li><button onClick={handleLogout}>로그아웃</button></li>
+            </>
           ) : (
-            // 로그아웃 상태일 때 로그인과 회원가입 링크 표시
             <>
               <li><Link to="/Login">로그인</Link></li>
               <li><Link to="/Account">회원가입</Link></li>
