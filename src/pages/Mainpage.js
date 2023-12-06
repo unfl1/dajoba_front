@@ -29,17 +29,17 @@ function Mainpage() {
             </div>
           </div>
         </div>
-        <div className="mt-10 bg-gray-100 pr-4 pl-4 ml-64 mr-64 grid grid-cols-3 md:h-1/6 gap-20 rounded ">
-          <div className="col-span-1  flex justify-self-end items-center">
+        <div className="mt-10 bg-gray-100 pr-4 pl-4 mx-auto max-w-screen-lg grid grid-cols-3 md:h-1/6 gap-20 rounded w-auto">
+          <div className="col-span-1 flex justify-self-end items-center md:text-right">
             <Link to="/Coverletterlist">
-              <button className="bg-white text-purple-600 px-4 py-2 mx-4 rounded font-bold">분석시작</button>
+              <button className="bg-white text-purple-600 px-4 py-2 mx-4 rounded font-bold md:mx-0">분석시작</button>
             </Link>
           </div>
-          <div className="place-self-center">
+          <div className="place-self-center text-center md:text-left">
             <div>자소서를 분석해</div>
             <div>채용공고와 매칭해 드려요</div>
           </div>
-          <img src={picture1} alt="" className="h-2/3  hidden md:flex  space-x-1 mt-6"></img>
+          <img src={picture1} alt="" className="h-2/3 hidden md:flex space-x-1 mt-6"></img>
         </div>
       </div>
       <Fourrecruit />
