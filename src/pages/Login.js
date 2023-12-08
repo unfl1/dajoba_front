@@ -8,16 +8,16 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // useNavigate 훅 사용
   const isLoggedIn = useSelector(state => state.user.isAuthenticated);
-  const [user, setUser] = useState({ username: '', password: '' });
+  const [user, setUser] = useState({ userid: '', password: '' });
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const testUsername = 'test';
+    const testuserid = 'test';
     const testPassword = '1234';
 
-    if (user.username === testUsername && user.password === testPassword) {
-      dispatch(login({ username: user.username, isAuthenticated: true }));
+    if (user.userid === testuserid && user.password === testPassword) {
+      dispatch(login({ userid: user.userid, isAuthenticated: true }));
       console.log('로그인 성공');
       navigate('/'); // 홈 화면으로 리다이렉트
     } else {
@@ -50,10 +50,10 @@ function Login() {
                   <label className="mb-2 block text-xs font-semibold">ID</label>
                   <input
                     type="ID"
-                    name="username"
+                    name="userid"
                     placeholder="ID를 입력해주세요"
                     onChange={handleChange}
-                    value={user.username}
+                    value={user.userid}
                     className="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500"
                   />
                 </div>
@@ -93,5 +93,115 @@ function Login() {
     </div>
   );
 }
+/*
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { login, logout } from '../redux/actions/Authactions';
+import API_BASE_URL from '../Config'; // Config.js에서 API_BASE_URL을 import
+
+function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector(state => state.user.isAuthenticated);
+  const [user, setUser] = useState({ userid: '', password: '' });
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      // 로그인 요청을 Config.js에서 정의한 API_BASE_URL을 사용하여 보냅니다.
+      const response = await axios.post(`${API_BASE_URL}/login`, {
+        id: user.userid,
+        password: user.password,
+      });
+
+      if (response.status === 200) {
+        // 백엔드가 성공 시 상태 코드 (예: 200)를 보낸다고 가정합니다.
+    const token = response.data.token; // 백엔드에서 반환한 토큰
+    localStorage.setItem('token', token); // 로컬 스토리지에 토큰 저장
+    dispatch(login({ userid: user.userid, isAuthenticated: true }));
+        console.log('로그인 성공');
+        navigate('/'); // 홈 화면으로 리다이렉트
+      } else {
+        console.error('로그인 실패');
+      }
+    } catch (error) {
+      console.error('로그인 실패', error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      // 로그아웃 요청을 Config.js에서 정의한 API_BASE_URL을 사용하여 보냅니다.
+      const response = await axios.post(`${API_BASE_URL}/logout`);
+
+      if (response.status === 200) {
+        // 백엔드가 성공 시 상태 코드 (예: 200)를 보낸다고 가정합니다.
+  localStorage.removeItem('token'); // 로컬 스토리지에서 토큰 제거
+  dispatch(logout());
+        console.log('로그아웃 성공');
+      } else {
+        console.error('로그아웃 실패');
+      }
+    } catch (error) {
+      console.error('로그아웃 실패', error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  return (
+    <div className="App">
+      {!isLoggedIn && (
+        <div>
+          <h1>로그인 페이지</h1>
+          <form onSubmit={handleLogin}>
+            <div>
+              <label>ID</label>
+              <input
+                type="text"
+                name="userid"
+                placeholder="ID를 입력해주세요"
+                onChange={handleChange}
+                value={user.userid}
+              />
+            </div>
+            <div>
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="비밀번호를 입력해주세요"
+                onChange={handleChange}
+                value={user.password}
+              />
+            </div>
+            <div>
+              <button type="submit">로그인</button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {isLoggedIn && (
+        <div>
+          <h2>로그인 성공!</h2>
+          <button onClick={handleLogout}>로그아웃</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Login;
+*/
 
 export default Login;

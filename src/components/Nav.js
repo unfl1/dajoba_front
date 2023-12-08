@@ -25,12 +25,12 @@ function Nav() {
         <ul className="flex gap-10 ml-20 pl-10">
           <Link to="/Recruitment"><li>채용</li></Link>          
           <Link to="/Coverletterlist"><li>자기소개서</li></Link>
-          <Link to="/Introduce"><li>소개</li></Link>
+          <Link to="/Projectintroduce"><li>소개</li></Link>
         </ul>
         <ul className="hidden md:flex items-center space-x-1 gap-5 mr-20 pr-10">
           {isLoggedIn ? (
             <>
-              <li>{user.username}님 안녕하세요!</li> {/* 유저 아이디 출력 */}
+              <li>{user.userid}님 안녕하세요!</li> {/* 유저 아이디 출력 */}
               <li><button onClick={handleLogout}>로그아웃</button></li>
             </>
           ) : (

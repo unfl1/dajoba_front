@@ -1,5 +1,3 @@
-//이전 12345 다음 같은 페이지 옮겨다니는거 구현
-
 import React from 'react';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
@@ -10,8 +8,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         <button
           key={i}
           onClick={() => onPageChange(i)}
-          className={`mx-1 px-3 py-1 border rounded transition-colors duration-300 ${i === currentPage ? 'bg-purple-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`
-        }
+          className={`mx-1 px-3 py-1 border rounded transition-colors duration-300 ${i === currentPage ? 'bg-purple-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
         >
           {i}
         </button>
@@ -24,14 +21,14 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     <div className="flex justify-center items-center my-4">
       <button
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-        className="pagination-button"
+        className={`pagination-button ${currentPage === 1 ? 'hidden' : ''}`}
       >
         이전
       </button>
       {renderPageNumbers()}
       <button
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-        className="pagination-button"
+        className={`pagination-button ${currentPage === totalPages ? 'hidden' : ''}`}
       >
         다음
       </button>

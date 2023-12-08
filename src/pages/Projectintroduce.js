@@ -4,7 +4,7 @@ import React from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 
-function Introduce() {
+function Projectintroduce() {
     return(
         <div>
             <Nav />
@@ -14,5 +14,5 @@ function Introduce() {
     );
 }
 
-export default Introduce;
+export default Projectintroduce;
 

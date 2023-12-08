@@ -1,5 +1,10 @@
+// Account.js
 import React, { useState } from 'react';
+import axios from 'axios'; // Axios 라이브러리를 import
+
 import { Link } from 'react-router-dom';
+
+import API_BASE_URL from '../Config'; // Config.js 파일의 경로를 적절히 수정하세요.
 
 function Account() {
   const [formData, setFormData] = useState({
@@ -16,7 +21,7 @@ function Account() {
       ...formData,
       [name]: value,
     });
-  
+
     if (name === 'password' || name === 'confirm') {
       const passwordValue = name === 'password' ? value : formData.password;
       const confirmPasswordValue = name === 'confirm' ? value : formData.confirm;
@@ -24,6 +29,31 @@ function Account() {
     }
   };
 
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    const apiUrl = `${API_BASE_URL}/signup`;
+
+    const userData = {
+      id: formData.id,
+      password: formData.password,
+      name: formData.name,
+      nick_name: formData.username,
+      birth: formData.birth,
+      phone_number: formData.phonenumber,
+      email: formData.email,
+    };
+
+    try {
+      const response = await axios.post(apiUrl, userData);
+
+      console.log('사용자가 성공적으로 등록되었습니다!', response.data);
+      // 필요한 작업을 수행하거나 사용자를 리디렉션할 수 있습니다.
+    } catch (error) {
+      console.error('사용자 등록 오류:', error);
+      // 오류 메시지를 사용자에게 표시하거나 오류를 처리할 수 있습니다.
+    }
+  };
   return (
     <div className="bg-gray-200 flex justify-center items-center">
       <div className="lg:w-2/5 md:w-1/2 w-2/3 mt-8 mb-8">
@@ -58,9 +88,8 @@ function Account() {
           <div>
             <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="confirm">비밀번호 확인</label>
             <input
-              className={`w-full bg-gray-100 px-2 py-1 rounded-lg focus:outline-none ${
-                passwordMatch ? 'text-green-500' : 'text-red-500'
-              }`}
+              className={`w-full bg-gray-100 px-2 py-1 rounded-lg focus:outline-none ${passwordMatch ? 'text-green-500' : 'text-red-500'
+                }`}
               type="password"
               name="confirm"
               id="confirm"
@@ -93,6 +122,7 @@ function Account() {
           </div>
           <button
             type="submit"
+            onClick={handleSignUp}
             className="w-full mt-6 bg-purple-600 rounded-lg px-2 py-1 text-lg text-white tracking-wide font-semibold font-sans"
           >
             회원가입

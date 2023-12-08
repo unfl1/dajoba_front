@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/Store';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Protectedroute from './components/Protectedroute'; // ProtectedRoute 컴포넌트 임포트
+import Protectedroute from './components/Protectedroute';
 import Mainpage from './pages/Mainpage';
 import Login from './pages/Login';
 import Account from './pages/Account';
 import Coverletterlist from './pages/Coverletterlist';
-import Coverletter from './pages/Coverletter';
+import Newcoverletter from './pages/Newcoverletter';
 import Recruitment from './pages/Recruitment';
-import Introduce from './pages/Introduce';
+import Projectintroduce from './pages/Projectintroduce';
 import Analyze from './pages/Analyze';
 import Notfoundpage from './pages/Notfoundpage';
 
@@ -29,13 +29,13 @@ function App() {
                 <Coverletterlist />
               </Protectedroute>
             } />
-            <Route path="Coverletter" element={
+            <Route path="Newcoverletter" element={
               <Protectedroute>
-                <Coverletter />
+                <Newcoverletter />
               </Protectedroute>
             } />
             <Route path="Recruitment" element={<Recruitment />} />
-            <Route path="Introduce" element={<Introduce />} />
+            <Route path="Projectintroduce" element={<Projectintroduce />} />
             <Route path="Analyze" element={<Analyze />} />
             <Route path="Notfoundpage" element={<Notfoundpage />} />
           </Routes>
