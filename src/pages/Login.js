@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from '../redux/actions/Authactions';
-import API_BASE_URL from '../Config'; // Config.js에서 API_BASE_URL을 import
+import API_BASE_URL from '../Config';
 
 function Login() {
   const dispatch = useDispatch();
@@ -14,16 +14,13 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
+    const apiUrl = `${API_BASE_URL}login`;
+  
     try {
-      // 로그인 요청을 Config.js에서 정의한 API_BASE_URL을 사용하여 보냅니다.
-      const response = await axios.post(`${API_BASE_URL}/login`, {
-        id: user.userid,
-        password: user.password,
-      });
-
+      const response = await axios.post(apiUrl);
+  
       if (response.status === 200) {
-        // 백엔드가 성공 시 상태 코드 (예: 200)를 보낸다고 가정합니다.
         dispatch(login({ userid: user.userid, isAuthenticated: true }));
         console.log('로그인 성공');
         navigate('/'); // 홈 화면으로 리다이렉트
@@ -37,11 +34,9 @@ function Login() {
 
   const handleLogout = async () => {
     try {
-      // 로그아웃 요청을 Config.js에서 정의한 API_BASE_URL을 사용하여 보냅니다.
       const response = await axios.post(`${API_BASE_URL}/logout`);
 
       if (response.status === 200) {
-        // 백엔드가 성공 시 상태 코드 (예: 200)를 보낸다고 가정합니다.
         dispatch(logout());
         console.log('로그아웃 성공');
       } else {
@@ -117,4 +112,3 @@ function Login() {
 }
 
 export default Login;
-

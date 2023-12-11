@@ -28,10 +28,10 @@ function Account() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-
+  
     const apiUrl = `${API_BASE_URL}signup`;
-
-    const userData = {
+  
+    const userData = new URLSearchParams({
       userId: formData.userId,
       password: formData.password,
       name: formData.name,
@@ -39,14 +39,14 @@ function Account() {
       birth: formData.birth,
       phoneNumber: formData.phoneNumber,
       email: formData.email,
-    };
-
+    });
+  
     try {
       const response = await axios.post(apiUrl, userData);
-
+  
       console.log('사용자가 성공적으로 등록되었습니다!', response.data);
       // 필요한 작업을 수행하거나 사용자를 리디렉션할 수 있습니다.
-
+  
       navigate('/login');
     } catch (error) {
       console.error('사용자 등록 오류:', error);
