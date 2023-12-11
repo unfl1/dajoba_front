@@ -1,22 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Rmboard from './Rmboard';
 import axios from 'axios';
 import API_BASE_URL from '../Config'; // Config.js에서 글로벌 주소 가져오기
 
 const Board2 = () => {
+  const categoryMap = useMemo(() => ({
+    '개발': 'DEVELOPMENT',
+    '경영·비즈니스': 'BUSINESS',
+    '마케팅·광고': 'MARKETING',
+    '디자인': 'DESIGN',
+    '영업': 'SALES',
+    '고객서비스·리테일': 'SERVICE',
+    '미디어': 'MEDIA',
+    '엔지니어링·설계': 'ENGINEER',
+    'HR': 'HR',
+    '게임 제작': 'GAME',
+    '금융': 'FINANCE',
+    '제조·생산': 'MANUFACTURE',
+    '의료·제약·바이오': 'MEDICAL',
+    '교육': 'EDU',
+    '물류·무역': 'LOGISTICS',
+    '식·음료': 'FOOD',
+    '법률·법집행기관': 'LEGAL',
+    '건설·시설': 'CONSTRUCTION',
+    '공공·복지': 'PUBLIC'
+  }), []);
+
   const [selectedCategory, setSelectedCategory] = useState('개발');
   const [data, setData] = useState([]); // 데이터를 저장할 상태(State)
   const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터를 저장할 상태(State)
 
-  const categories = ['개발', '경영·비즈니스', '마케팅·광고', '디자인', '영업', '고객서비스·리테일', '미디어', '엔지니어링·설계', 'HR', '게임 제작', '금융', '제조·생산', '의료·제약·바이오', '교육', '물류·무역', '식·음료', '법률·법집행기관', '건설·시설', '공공·복지'];
-
+  const categories = Object.keys(categoryMap); // 한글 카테고리 이름 배열
   useEffect(() => {
     // REST API 호출 및 데이터를 상태에 저장하는 코드
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/jobs`, {
           params: {
-            id: 'job_group', // ID 필드 지정
+            id: categoryMap[selectedCategory], // 한글 카테고리를 영어 키로 변환하여 사용
           },
         });
         const jsonData = response.data;
@@ -27,11 +48,12 @@ const Board2 = () => {
     };
 
     fetchData(); // 데이터 가져오기
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [selectedCategory]);
 
   useEffect(() => {
     // 선택한 카테고리에 따라 데이터 필터링
-    const filtered = data.filter((item) => item.category === selectedCategory);
+    const filtered = data.filter((item) => item.category === categoryMap[selectedCategory]);
     setFilteredData(filtered);
   }, [selectedCategory, data]);
 

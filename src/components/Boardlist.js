@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import API_BASE_URL from '../Config'; // config.js에서 API_BASE_URL을 가져옵니다.
 
-
 // 게시판 항목을 표시하는 컴포넌트입니다.
 const BoardItem = ({ title, date, index, selectedRows, setSelectedRows }) => {
   const handleDeleteClick = () => {

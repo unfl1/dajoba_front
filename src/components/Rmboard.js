@@ -27,6 +27,7 @@ class Rmboard extends Component {
     return currentCards.map((job, index) => (
       <div key={index}>
         <Card
+          job_post_url={job.job_post_url} // job_post_url을 전달
           imageUrl={job.TITLE_IMG || 'default-image.jpeg'}
           title={job.TITLE || '이미지 타이틀'}
           heading={job.TITLE || '제목'}
