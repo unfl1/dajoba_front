@@ -6,7 +6,7 @@ import API_BASE_URL from '../Config'; // config.js에서 API_BASE_URL을 가져�
 // 게시판 항목을 표시하는 컴포넌트입니다.
 const BoardItem = ({ title, date, index, selectedRows, setSelectedRows }) => {
   const handleDeleteClick = () => {
-    const deleteUrl = `${API_BASE_URL}/users/{userid}/self-intro/{introid}`; // API URL 구조에 맞게 수정해야 합니다.
+    const deleteUrl = `${API_BASE_URL}users/{userid}/self-intro/{introid}`; // API URL 구조에 맞게 수정해야 합니다.
     const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },

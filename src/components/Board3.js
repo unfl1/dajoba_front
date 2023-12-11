@@ -1,4 +1,3 @@
-// Board3.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../Config';
@@ -6,9 +5,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Checkbox from '../components/Checkbox';
 import { useSelector } from 'react-redux';
 
-const user = useSelector(state => state.user.user);
+
 
 const Board3 = () => {
+    const user = useSelector(state => state.user.user);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]); // 선택된 체크박스를 관리합니다.
@@ -17,7 +17,7 @@ const Board3 = () => {
 
     useEffect(() => {
         // userid와 introid를 사용하여 데이터를 가져오는 GET 요청을 보냅니다.
-        axios.get(`${API_BASE_URL}/users/${user.userid}/self-intro/${introid}`)
+        axios.get(`${API_BASE_URL}users/${user.userid}/self-intro/${introid}`)
             .then((response) => {
                 const data = response.data;
                 setTitle(data.intro_name); // 기존 제목 설정

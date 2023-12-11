@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../Config';
 import { useNavigate } from 'react-router-dom';
 import Checkbox from '../components/Checkbox';
+import { useSelector } from 'react-redux';
 
 const Board = () => {
+  const user = useSelector(state => state.user.user);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [userId, setUserId] = useState('');
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]); // 선택한 체크박스를 관리합니다.
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // 사용자 ID를 가져오는 API 호출
-    axios.get('URL_사용자_ID_를_가져오는_API')
-      .then(userResponse => {
-        // 사용자 정보에서 userId 추출
-        const fetchedUserId = userResponse.data.userId;
-        setUserId(fetchedUserId); // 상태 업데이트
-      })
-      .catch(error => {
-        // 오류 처리
-        console.error('사용자 ID를 가져오는 중 오류 발생:', error);
-      });
-  }, []); // 빈 배열을 사용하여 한 번만 호출
-
   const handleCheckboxChange = (checkboxName) => {
-    // 선택된 체크박스 정보를 업데이트합니다.
     const updatedCheckboxes = selectedCheckboxes.includes(checkboxName)
       ? selectedCheckboxes.filter(name => name !== checkboxName)
       : [...selectedCheckboxes, checkboxName];
@@ -42,19 +28,15 @@ const Board = () => {
   };
 
   const handleSave = () => {
-    // 사용자 ID를 사용하여 API 호출
-    const endpoint = `/users/${userId}/self-intro`;
+    const endpoint = `/users/${user.userid}/self-intro`;
     const fullUrl = API_BASE_URL + endpoint;
 
-    // 데이터를 서버로 POST합니다.
     axios.post(fullUrl, { title, text, selectedCheckboxes })
       .then((response) => {
-        // 성공적으로 데이터를 전송한 경우 처리
         console.log('데이터가 성공적으로 전송되었습니다.', response.data);
         navigate('/Coverletterlist');
       })
       .catch((error) => {
-        // 오류 발생 시 처리
         console.error('데이터 전송 중 오류 발생:', error);
       });
   };

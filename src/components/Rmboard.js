@@ -28,10 +28,8 @@ class Rmboard extends Component {
       <div key={index}>
         <Card
           job_post_url={job.job_post_url} // job_post_url을 전달
-          imageUrl={job.TITLE_IMG || 'default-image.jpeg'}
-          title={job.TITLE || '이미지 타이틀'}
+          title={job.TITLE_IMG || '이미지 타이틀'}
           heading={job.TITLE || '제목'}
-          description={job.MAINDUTIES || '여기에 설명을 작성하세요.'}
         />
       </div>
     ));

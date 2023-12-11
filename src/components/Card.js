@@ -21,7 +21,6 @@ class Card extends Component {
               </div>
             </div>
             <h2 className="text-2xl mb-2">{this.props.heading || '제목'}</h2>
-            <p className="text-gray-700">{this.props.description || '여기에 설명을 작성하세요.'}</p>
           </div>
         </div>
       </a>
