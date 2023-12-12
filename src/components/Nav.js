@@ -30,7 +30,7 @@ function Nav() {
         <ul className="hidden md:flex items-center space-x-1 gap-5 mr-20 pr-10">
           {isLoggedIn ? (
             <>
-              <li>{user.userid}님 안녕하세요!</li> {/* 유저 아이디 출력 */}
+              <li>{user.userid}님 안녕하세요!</li>
               <li><button onClick={handleLogout}>로그아웃</button></li>
             </>
           ) : (

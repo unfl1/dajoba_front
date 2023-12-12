@@ -28,8 +28,7 @@ const Board = () => {
   };
 
   const handleSave = () => {
-    const endpoint = `/users/${user.userid}/self-intro`;
-    const fullUrl = API_BASE_URL + endpoint;
+    const fullUrl = `${API_BASE_URL}users/${user.userid}/self-intro`;
 
     axios.post(fullUrl, { title, text, selectedCheckboxes })
       .then((response) => {
