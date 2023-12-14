@@ -15,6 +15,7 @@ import Projectintroduce from './pages/Projectintroduce';
 import Analyze from './pages/Analyze';
 import Notfoundpage from './pages/Notfoundpage';
 import RecruitmentDetail from './pages/Recruitmentdetail';
+import Mycoverletter from './pages/Mycoverletter';
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
             <Route path="Newcoverletter" element={
               <Protectedroute>
                 <Newcoverletter />
+              </Protectedroute>
+            } />
+            <Route path="Mycoverletter/:introid" element={
+              <Protectedroute>
+                <Mycoverletter />
               </Protectedroute>
             } />
             <Route path="Recruitment" element={<Recruitment />} />

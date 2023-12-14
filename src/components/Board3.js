@@ -1,113 +1,161 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../Config';
-import { useNavigate, useParams } from 'react-router-dom';
-import Checkbox from '../components/Checkbox';
+import { useParams} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-
-
 const Board3 = () => {
-    const user = useSelector(state => state.user.user);
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState([]); // 선택된 체크박스를 관리합니다.
-    const navigate = useNavigate();
-    const { userid, introid } = useParams();
+  const { introid } = useParams();  // URL에서 introId를 추출 (문자열 형태)
+  const user = useSelector(state => state.user.user);
+  const [introName, setIntroName] = useState('');
+  const [introContent, setIntroContent] = useState('');
+  const [desireField, setDesireField] = useState(0); // 정수로 변경
+  
 
-    useEffect(() => {
-        // userid와 introid를 사용하여 데이터를 가져오는 GET 요청을 보냅니다.
-        axios.get(`${API_BASE_URL}users/${user.userid}/self-intro/${introid}`)
-            .then((response) => {
-                const data = response.data;
-                setTitle(data.intro_name); // 기존 제목 설정
-                setText(data.intro_content); // 기존 내용 설정
-                setSelectedCheckboxes(data.desire_content); // 선택된 체크박스 설정
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }, [userid, introid]);
-
-    const handleCheckboxChange = (checkboxName) => {
-        // 선택된 체크박스 정보를 업데이트합니다.
-        const updatedCheckboxes = selectedCheckboxes.includes(checkboxName)
-            ? selectedCheckboxes.filter(name => name !== checkboxName)
-            : [...selectedCheckboxes, checkboxName];
-        setSelectedCheckboxes(updatedCheckboxes);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // introid를 숫자로 변환하여 요청
+        const numericIntroId = Number(introid);
+        const response = await axios.get(`${API_BASE_URL}users/${user.userid}/selfintro/${numericIntroId}`);
+        const data = response.data;
+        setIntroName(data.introName || '');
+        setIntroContent(data.introContent || '');
+        setDesireField(Number(data.desireField) || 0);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
+    fetchData();
+  }, [introid, user.userid]);
 
-    const handleTextChange = (e) => {
-        setText(e.target.value);
-    };
+  const categoryNames = {
+        "518": "개발",
+    "507": "경영·비즈니스",
+    "523": "마케팅",
+    "511": "디자인",
+    "530": "영업",
+    "510": "고객서비스·리테일",
+    "524": "미디어",
+    "513": "엔지니어링·설계",
+    "517": "HR",
+    "959": "게임 제작",
+    "508": "금융",
+    "522": "제조·생산",
+    "515": "의료·제약·바이오",
+    "532": "물류·무역",
+    "10057": "식·음료",
+    "521": "법률·법진행기관",
+    "509": "건설·시설",
+    "514": "공공·복지"
+    // 나머지 직군들도 여기에 추가
+  };
 
-    const handleSave = () => {
-        // 수정된 데이터와 선택된 체크박스 정보를 서버에 PUT 요청으로 보냅니다.
-        axios.put(`${API_BASE_URL}/users/${user.userid}/self-intro/${introid}`, {
-            intro_name: title, // 수정된 제목
-            intro_content: text, // 수정된 내용
-            desire_content: selectedCheckboxes // 수정된 체크박스 정보
-        })
-        .then((response) => {
-            navigate('/Coverletterlist');
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    };
+  const handleJobChange = (event) => {
+    const selectedJobName = event.target.value;
+    const selectedJobId = Object.keys(categoryNames).find(key => categoryNames[key] === selectedJobName);
+    setDesireField(Number(selectedJobId) || 0); // 정수로 변경
+  };
 
-    return (
-        <div className="flex items-center justify-center p-12">
-            <div className="mx-auto w-full max-w-[960px]">
-                <div className="mb-6">직군(희망분야)</div>
-                <Checkbox
-                    checkboxNames={['개발', '경영·비즈니스', '마케팅·광고', '디자인', '영업', '고객서비스·리테일', '미디어', '엔지니어링·설계', 'HR', '게임 제작', '금융', '제조·생산', '의료·제약·바이오', '교육', '물류·무역', '식·음료', '법률·법집행기관', '건설·시설', '공공·복지']}
-                    selectedCheckboxes={selectedCheckboxes}
-                    onCheckboxChange={handleCheckboxChange}
-                />
-                <div className="mb-5">
-                    <label htmlFor="title" className="mb-3 block text-base font-medium text-[#07074D]">
-                        제목
-                    </label>
-                    <textarea
-                        rows="1"
-                        name="title"
-                        id="title"
-                        placeholder="제목을 입력해주세요"
-                        className="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
-                        value={title}
-                        onChange={handleTitleChange}
-                    ></textarea>
-                </div>
-                <div className="mb-5">
-                    <label htmlFor="message" className="mb-3 block text-base font-medium text-[#07074D]">
-                        자기소개서 작성
-                    </label>
-                    <textarea
-                        rows="20"
-                        name="message"
-                        id="message"
-                        placeholder="해당 내용을 입력해주세요"
-                        className="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
-                        value={text}
-                        onChange={handleTextChange}
-                    ></textarea>
-                    <div className="text-right mt-2">
-                        공백 포함 <span className="text-purple-600">{text.length}</span> 자
-                    </div>
-                </div>
-                <div>
-                    <button className="hover:shadow-form rounded-md bg-purple-500 py-3 px-8 text-base font-semibold text-white outline-none" onClick={handleSave}>
-                        수정
-                    </button>
-                </div>
+  const handleTitleChange = (event) => {
+    setIntroName(event.target.value || '');
+  };
+
+  const handleTextChange = (event) => {
+    setIntroContent(event.target.value || '');
+  };
+
+  const handleSave = async (event) => {
+    event.preventDefault(); // 기본 폼 제출 동작 방지
+    try {
+      const putData = new URLSearchParams({
+        
+        introName,
+        introContent,
+        desireField,
+      });
+  
+      await axios.put(`${API_BASE_URL}users/${user.userid}/selfintro/${introid}`, putData);
+      console.log('데이터가 성공적으로 업데이트되었습니다.');
+      
+      // 데이터를 저장한 후에 상태(state)를 업데이트하여 현재 페이지를 그대로 유지합니다.
+      // 이렇게 하면 데이터를 저장한 후에도 화면은 그대로 유지됩니다.
+      // 필요한 경우 상태 업데이트 후에 화면을 다시 그릴 수 있습니다.
+      setIntroName(introName);
+      setIntroContent(introContent);
+      setDesireField(desireField);
+    } catch (error) {
+      console.error('데이터 업데이트 중 오류 발생:', error);
+      // 여기서 오류를 처리하고 표시할 수 있습니다.
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-center p-12">
+      <div className="mx-auto w-full max-w-[960px]">
+        <form onSubmit={handleSave}>
+                    <div className="mb-6">
+            <label htmlFor="desireField" className="mb-3 block text-base font-medium text-[#07074D]">
+              직군(희망분야)
+            </label>
+            <select
+              id="desireField"
+              name="desireField"
+              className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
+              value={categoryNames[desireField] || ""}
+              onChange={handleJobChange}
+            >
+              {Object.entries(categoryNames).map(([key, value]) => (
+                <option key={key} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-5">
+            <label htmlFor="introName" className="mb-3 block text-base font-medium text-[#07074D]">
+              제목
+            </label>
+            <input
+              type="text"
+              id="introName"
+              name="introName"
+              placeholder="제목을 입력해주세요"
+              className="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
+              value={introName || ""}
+              onChange={handleTitleChange}
+            />
+          </div>
+          <div className="mb-5">
+            <label htmlFor="introContent" className="mb-3 block text-base font-medium text-[#07074D]">
+              자기소개서 작성
+            </label>
+            <textarea
+              rows="20"
+              name="introContent"
+              id="introContent"
+              placeholder="해당 내용을 입력해주세요"
+              className="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
+              value={introContent || ""}
+              onChange={handleTextChange}
+            ></textarea>
+            <div className="text-right mt-2">
+              공백 포함 <span className="text-purple-600">{introContent.length}</span> 자
             </div>
-        </div>
-    );
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="hover:shadow-form rounded-md bg-purple-500 py-3 px-8 text-base font-semibold text-white outline-none"
+            >
+              저장
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default Board3;

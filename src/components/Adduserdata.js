@@ -4,82 +4,104 @@ import API_BASE_URL from '../Config';
 import { useSelector } from 'react-redux';
 
 function Adduserdata() {
-  const userId = useSelector(state => state.user.user); // 여기에서 userId를 구합니다.
-
   const [formData, setFormData] = useState({
-    education: '', // 최종학력 상태
-    experience: '', // 경력 상태
+    academicBackground: '',
+    experience: '',
   });
 
+  const user = useSelector(state => state.user.user);
+
   useEffect(() => {
-    // 사용자 추가 정보 가져오기
-    axios.get(`${API_BASE_URL}/users/${userId}/extra-info`)
-      .then(response => {
+    axios.get(`${API_BASE_URL}users/${user.userid}/extrainfo`)
+      .then((response) => {
         setFormData({
-          education: response.data.academicBackground || '',
+          academicBackground: response.data.academicBackground || '',
           experience: response.data.experience || '',
         });
       })
-      .catch(error => console.error('데이터 가져오기 오류:', error));
-  }, [userId]); // userId를 의존성 배열에 추가합니다.
-
-  const handleEducationChange = (event) => {
-    setFormData({ ...formData, education: event.target.value });
-  };
-
-  const handleExperienceChange = (event) => {
-    setFormData({ ...formData, experience: event.target.value });
-  };
-
-  const handleSave = async () => {
-    await axios.post(`${API_BASE_URL}/users/${userId}/extra-info`, formData)
-      .then(response => {
-        // 응답 처리, 예: 성공 메시지 표시
-      })
-      .catch(error => {
-        // 오류 처리, 예: 오류 메시지 표시
+      .catch((error) => {
+        console.error('Error fetching data:', error);
       });
+  }, [user.userid]);
+
+  const AcademicBackgroundNames = {
+    "HI": "고등학교 졸업",
+    "AD": "전문학사(2년제 전문대학)",
+    "BD": "학사(4년제 졸업)",
+    "MD": "석사",
+    "DD": "박사",
+    // 나머지 학력도
+  };
+
+  const experienceNames = {
+    "1": "1년 미만",
+    "3": "1~3년",
+    "5": "3~5년",
+    "6": "5년이상",
+    // 나머지 경력도
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = async (event) => {
+    event.preventDefault();
+    const postData = new URLSearchParams(formData);
+
+    await axios.post(`${API_BASE_URL}users/${user.userid}/extrainfo`, postData);
+
+    // 성공 메시지나 리디렉션 등을 수행할 수 있습니다.
   };
 
   return (
     <div>
-      <div className="mr-24 ml-24 mt-10 mb-4">
-        <div className="mb-2 pl-4">* 최종학력</div>
-        <select
-          value={formData.education}
-          onChange={handleEducationChange} // 이 부분을 수정합니다.
-          className="w-1/2 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
-        >
-          <option value="">최종학력 선택</option>
-          <option value="고등학교 졸업">고등학교 졸업</option>
-          <option value="전문학사(2년제 전문대학)">전문학사(2년제 전문대학)</option>
-          <option value="학사(4년제 졸업)">학사(4년제 졸업)</option>
-          <option value="석사">석사</option>
-          <option value="박사">박사</option>
-        </select>
-      </div>
-      <div className="mr-24 ml-24 mb-4">
-        <div className="pl-4 pb-2">* 경력</div>
-        <select
-          value={formData.experience}
-          onChange={handleExperienceChange} // 이 부분을 수정합니다.
-          className="w-1/2 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
-        >
-          <option value="">경력 선택</option>
-          <option value="1년미만">1년미만</option>
-          <option value="1~3년">1~3년</option>
-          <option value="3~5년">3~5년</option>
-          <option value="5년이상">5년이상</option>
-        </select>
-      </div>
-      <div className="text-center pt-6">
-        <button
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-2 rounded"
-          onClick={handleSave}
-        >
-          저장
-        </button>
-      </div>
+      <form onSubmit={handleSave}>
+        <div className="mr-24 ml-24 mt-10 mb-4">
+          <div className="mb-2 pl-4">* 최종학력</div>
+          <select
+            id="academicBackground"
+            name="academicBackground"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
+            value={formData.academicBackground}
+            onChange={handleChange}
+          >
+            {Object.entries(AcademicBackgroundNames).map(([key, value]) => (
+              <option key={key} value={key}>
+                {value}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="mr-24 ml-24 mb-4">
+          <div className="pl-4 pb-2">* 경력</div>
+          <select
+            id="experience"
+            name="experience"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-purple-500 focus:shadow-md"
+            value={formData.experience}
+            onChange={handleChange}
+          >
+            {Object.entries(experienceNames).map(([key, value]) => (
+              <option key={key} value={key}>
+                {value}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="text-center pt-6">
+          <button
+            type="submit"
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-2 rounded"
+          >
+            저장
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

@@ -1,115 +1,132 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import API_BASE_URL from '../Config'; // config.js에서 API_BASE_URL을 가져옵니다.
+import API_BASE_URL from '../Config';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
+function SelfIntroList() {
+  const [intros, setIntros] = useState([]);  // 자기소개서 목록을 저장할 상태
+  const [page, setPage] = useState(1);       // 현재 페이지
+  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수
+  const pageSize = 10;                       // 페이지당 항목 수
 
-// 게시판 항목을 표시하는 컴포넌트입니다.
-const BoardItem = ({ title, date, index, selectedRows, setSelectedRows }) => {
-  const handleDeleteClick = () => {
-    const deleteUrl = `${API_BASE_URL}users/{userid}/self-intro/{introid}`; // API URL 구조에 맞게 수정해야 합니다.
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-    };
+  const user = useSelector(state => state.user.user);
 
-    // Axios를 사용하여 API 요청을 보냅니다.
-    axios
-      .delete(deleteUrl, requestOptions)
-      .then(response => {
-        if (response.status === 204) {
-          setSelectedRows(selectedRows.filter(selectedIndex => selectedIndex !== index));
-        } else {
-          console.error('삭제 요청이 실패하였습니다.');
+  // 자기소개서 데이터를 가져오는 useEffect
+  useEffect(() => {
+    fetchIntros();
+  }, [user.userid, page]);
+
+  const fetchIntros = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}users/${user.userid}/selfintro/list`, {
+        params: {
+          page: page - 1,
+          size: pageSize,
         }
-      })
-      .catch(error => {
-        console.error('삭제 요청 중 오류가 발생하였습니다.', error);
       });
+      const introData = response.data.content.map(selfIntro => ({
+        introId: selfIntro.introId,
+        introName: selfIntro.introName,
+        lastUpdated: selfIntro.lastUpdated,
+      }));
+      setIntros(introData);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error('API 호출 중 오류 발생:', error);
+    }
+  };
+
+  // 페이지 변경 처리 함수
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+
+  // 자기소개서 삭제 함수
+  const handleDelete = async (introId) => {
+    try {
+      await axios.delete(`${API_BASE_URL}users/${user.userid}/selfintro/${introId}`);
+      alert('삭제되었습니다.');
+      fetchIntros();  // 목록을 다시 불러옵니다.
+    } catch (error) {
+      console.error('자기소개서 삭제 중 오류 발생:', error);
+      alert('삭제 중 오류가 발생했습니다.');
+    }
+  };
+
+  // 자기소개서 목록 렌더링 함수
+  const renderIntros = () => {
+    return intros.map((selfIntro, index) => (
+      <tr key={selfIntro.introId} datanum={index}>
+        <td className="border px-4 py-2">{selfIntro.introName}</td>
+        <td className="border px-4 py-2">{selfIntro.lastUpdated}</td>
+        <td className="border px-4 py-2">
+          <a href={`/Mycoverletter/${selfIntro.introId}`}>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              상세보기
+            </button>
+          </a>
+        </td>
+        <td className="border px-4 py-2">
+          <button
+            onClick={() => handleDelete(selfIntro.introId)}
+            className="bg-red-500 hover.bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            삭제
+          </button>
+        </td>
+        <td className="border px-4 py-2">
+          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            분석시작
+          </button>
+        </td>
+      </tr>
+    ));
   };
 
   return (
-    <tr className="hover:bg-gray-100 transition duration-200 ease-in-out">
-      <td className="px-4 py-3">{title}</td>
-      <td className="px-4 py-3">{date}</td>
-      <td className="px-4 py-3">
-        <Link to= '/Board3'>
-          <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded ml-2">
-            상세보기
-          </button>
-        </Link>
-      </td>
-      <td className="px-4 py-3">
-        <button
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2"
-          onClick={handleDeleteClick}
-        >
-          삭제
-        </button>
-      </td>
-      <td className="px-4 py-3">
-        <Link to="/Analyze">
-          <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded ml-2">
-            분석 Start!
-          </button>
-        </Link>
-      </td>
-    </tr>
-  );
-};
-
-// 게시판 목록 컴포넌트입니다.
-const SelfIntroList = () => {
-  const [selectedRows, setSelectedRows] = useState([]);
-  const [posts, setPosts] = useState([]);
-
-  // useEffect를 사용하여 컴포넌트가 마운트될 때 API에서 데이터를 가져옵니다.
-  useEffect(() => {
-    // 백엔드 API에서 게시판 데이터를 가져옵니다.
-    axios.get(`${API_BASE_URL}/users/{userid}/self-intro/list`) 
-      .then(response => {
-        // API 응답이 객체 배열인 경우 "intro_name"을 제목(title)으로, "last_updated"를 작성일(date)로 사용합니다.
-        setPosts(response.data);
-      })
-      .catch(error => {
-        console.error('게시판 데이터를 불러오는 중 오류가 발생하였습니다.', error);
-      });
-  }, []);
-
-  return (
     <div className="container mx-auto p-4">
-      <div className="flex justify-end mb-4">
+      <div className="flex items-center justify-end mb-6">
         <Link to="/Newcoverletter">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
             글쓰기
           </button>
         </Link>
       </div>
-      <table className="table-auto w-full text-center border-collapse border border-gray-300">
+      <table className="min-w-full table-auto">
         <thead>
-          <tr className="bg-gray-200">
-            <th className="px-4 py-3">제목</th>
-            <th className="px-4 py-3">작성일</th>
-            <th className="px-4 py-3">상세보기</th>
-            <th className="px-4 py-3">삭제하기</th>
-            <th className="px-4 py-3">분석</th>
+          <tr>
+            <th className="px-4 py-2">제목</th>
+            <th className="px-4 py-2">작성일</th>
+            <th className="px-4 py-2">상세보기</th>
+            <th className="px-4 py-2">삭제</th>
+            <th className="px-4 py-2">분석시작</th>
           </tr>
         </thead>
         <tbody>
-          {posts.map((post, index) => (
-            <BoardItem
-              key={index}
-              index={post.userid} // "userid"가 데이터의 고유 식별자인 경우 사용합니다.
-              title={post.intro_name}
-              date={post.last_updated}
-              selectedRows={selectedRows}
-              setSelectedRows={setSelectedRows}
-            />
-          ))}
+          {renderIntros()}
         </tbody>
       </table>
+      <div className="flex justify-center mt-4">
+        {page > 1 && (
+          <button
+            onClick={() => handlePageChange(page - 1)}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+          >
+            이전
+          </button>
+        )}
+        {page < totalPages && (
+          <button
+            onClick={() => handlePageChange(page + 1)}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          >
+            다음
+          </button>
+        )}
+      </div>
     </div>
   );
-};
+}
 
 export default SelfIntroList;
