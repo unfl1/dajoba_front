@@ -14,6 +14,7 @@ import Recruitment from './pages/Recruitment';
 import Projectintroduce from './pages/Projectintroduce';
 import Analyze from './pages/Analyze';
 import Notfoundpage from './pages/Notfoundpage';
+import RecruitmentDetail from './pages/Recruitmentdetail';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               </Protectedroute>
             } />
             <Route path="Recruitment" element={<Recruitment />} />
+            <Route path="Recruitment/Detail/:id" element={<RecruitmentDetail />} />
             <Route path="Projectintroduce" element={<Projectintroduce />} />
             <Route path="Analyze" element={<Analyze />} />
             <Route path="Notfoundpage" element={<Notfoundpage />} />
