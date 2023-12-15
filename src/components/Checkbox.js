@@ -7,7 +7,7 @@ function Checkbox({ checkboxNames = [], selectedCheckboxes = [], onCheckboxChang
       const updatedCheckboxes = selectedCheckboxes.includes(checkboxName)
         ? selectedCheckboxes.filter((name) => name !== checkboxName)
         : [...selectedCheckboxes, checkboxName];
-      onCheckboxChange(updatedCheckboxes);
+      onCheckboxChange(updatedCheckboxes);   
     }
   };
 

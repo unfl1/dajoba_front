@@ -172,7 +172,7 @@ function Board2() {
             paddingTop: '3px',
             marginRight: '15.5px',
             fontSize: '28px',
-            lineHeight: '29px',
+            lineHeight: '25px',
             fontWeight: '700',
             color: '#333'
           }}

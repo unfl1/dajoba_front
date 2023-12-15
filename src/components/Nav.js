@@ -48,7 +48,7 @@ function Nav() {
             </li>
           </Link>
           <Link to="/Coverletterlist">
-            <li className="font-medium hover:text-pink-400">자기소개서</li>
+            <li className="font-medium hover:text-pink-400">이력서관리</li>
           </Link>
           <Link to="/Projectintroduce">
             <li className="font-medium hover:text-pink-400">소개</li>

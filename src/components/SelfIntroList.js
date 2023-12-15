@@ -78,27 +78,6 @@ function SelfIntroList() {
         <td className="border px-4 py-2">{selfIntro.introName}</td>
         <td className="border px-4 py-2">{selfIntro.lastUpdated}</td>
         <td className="border px-4 py-2">
-          {/* <a href={`/Mycoverletter/${selfIntro.introId}`}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              상세보기
-            </button>
-          </a>
-        </td>
-        <td className="border px-4 py-2">
-          <button
-            onClick={() => handleDelete(selfIntro.introId)}
-            className="bg-red-500 hover.bg-red-700 text-white font-bold py-2 px-4 rounded"
-          >
-            삭제
-          </button>
-        </td>
-        <td className="border px-4 py-2">
-          <button
-            onClick={() => navigateToAnalyze(selfIntro.introId)}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            분석시작
-          </button> */}
 
           <div className="flex flex-row items-center justify-center">
             <button
@@ -129,7 +108,12 @@ function SelfIntroList() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4" style={{
+      width: '70%',
+
+      justifyContent: 'center'
+    }}
+    >
       <div className="flex items-center justify-end mb-6">
         <Link to="/Newcoverletter">
           <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
@@ -137,7 +121,11 @@ function SelfIntroList() {
           </button>
         </Link>
       </div>
-      <table className="min-w-full table-auto">
+      <table className="table-auto " style={{
+        width: '90%',
+
+        justifyContent: 'center'
+      }}>
         <thead>
           <tr>
             <th className="px-4 py-2">제목</th>

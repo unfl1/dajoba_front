@@ -23,14 +23,15 @@ ChartJS.register(
 function Piechart({ matchScore }) {
   // matchScore 데이터를 기반으로 Pie Chart 데이터를 동적으로 생성합니다.
   const data = {
-    labels: ['Match Score', 'Remaining'],
+    labels: ['매칭 점수'],
     datasets: [
       {
         label: 'Probability',
         data: [matchScore, 100 - matchScore], // matchScore와 나머지를 계산하여 데이터 설정
         backgroundColor: [
           'rgba(102, 0, 204, 0.2)', // 보라색
-          'rgba(169, 169, 169, 0.2)', // 회색
+          'rgba(220, 220, 220, 0.8)' // 더 밝은 회색
+
         ],
         borderColor: [
           'rgba(102, 0, 204, 1)',
@@ -41,7 +42,12 @@ function Piechart({ matchScore }) {
     ],
   };
 
+ 
+
   return <Pie data={data} />;
 }
+
+
+
 
 export default Piechart;

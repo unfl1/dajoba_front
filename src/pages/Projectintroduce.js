@@ -1,21 +1,16 @@
-//홈페이지 약간 소개 느낌
-
 import React from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import CompanyIntroduce from '../components/CompanyIntroduce';
 
 function Projectintroduce() {
     return(
         <div>
-            <Nav />
-            <div
-             style={{
-                paddingTop: '170px'
-              }}>간단한 프로젝트 소개 페이지</div>
+            <Nav />           
+            <CompanyIntroduce />           
             <Footer />
         </div>
     );
 }
 
 export default Projectintroduce;
-
