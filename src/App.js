@@ -16,6 +16,8 @@ import Analyze from './pages/Analyze';
 import Notfoundpage from './pages/Notfoundpage';
 import RecruitmentDetail from './pages/Recruitmentdetail';
 import Mycoverletter from './pages/Mycoverletter';
+import TermsOfUsePage from './pages/TermsOfUsePage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 function App() {
   return (
@@ -44,8 +46,10 @@ function App() {
             <Route path="Recruitment" element={<Recruitment />} />
             <Route path="Recruitment/Detail/:id" element={<RecruitmentDetail />} />
             <Route path="Projectintroduce" element={<Projectintroduce />} />
-            <Route path="Analyze" element={<Analyze />} />
+            <Route path="Analyze/:introid" element={<Analyze />} />
             <Route path="Notfoundpage" element={<Notfoundpage />} />
+            <Route path="TermsOfUsePage" element={<TermsOfUsePage/>} />
+            <Route path="PrivacyPolicyPage" element={<PrivacyPolicyPage/>} />           
           </Routes>
         </BrowserRouter>
       </PersistGate>

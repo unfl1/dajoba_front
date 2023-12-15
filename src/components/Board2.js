@@ -49,8 +49,7 @@ function Board2() {
     })
       .then((response) => {
         const jobData = response.data.content.map(job => ({
-          title: job.title,
-          
+          title: job.title,          
           id: job.id,
           titleImg: job.titleImg,
         }));

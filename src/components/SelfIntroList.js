@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'; // useCallback 추가
 import axios from 'axios';
 import API_BASE_URL from '../Config';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function SelfIntroList() {
   const [intros, setIntros] = useState([]);  // 자기소개서 목록을 저장할 상태
@@ -11,13 +11,15 @@ function SelfIntroList() {
   const pageSize = 10;                       // 페이지당 항목 수
 
   const user = useSelector(state => state.user.user);
+  const navigate = useNavigate();
 
-  // 자기소개서 데이터를 가져오는 useEffect
-  useEffect(() => {
-    fetchIntros();
-  }, [user.userid, page]);
+  const navigateToAnalyze = (introId) => {
+    const analyzeRoute = `/Analyze/${introId}`;
+    navigate(analyzeRoute); // 페이지 이동
+  };
 
-  const fetchIntros = async () => {
+  // useCallback을 사용하여 fetchIntros 함수 메모이제이션
+  const fetchIntros = useCallback(async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}users/${user.userid}/selfintro/list`, {
         params: {
@@ -35,7 +37,12 @@ function SelfIntroList() {
     } catch (error) {
       console.error('API 호출 중 오류 발생:', error);
     }
-  };
+  }, [user.userid, page]); // 의존성 배열에 user.userid와 page 추가
+
+  // 자기소개서 데이터를 가져오는 useEffect
+  useEffect(() => {
+    fetchIntros();
+  }, [fetchIntros]); // useEffect에서 fetchIntros 함수를 의존성으로 추가
 
   // 페이지 변경 처리 함수
   const handlePageChange = (newPage) => {
@@ -76,7 +83,10 @@ function SelfIntroList() {
           </button>
         </td>
         <td className="border px-4 py-2">
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            onClick={() => navigateToAnalyze(selfIntro.introId)}
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
             분석시작
           </button>
         </td>

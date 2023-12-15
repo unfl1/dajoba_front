@@ -39,6 +39,7 @@ function Login() {
       if (response.status === 200) {
         dispatch(logout());
         console.log('로그아웃 성공');
+        navigate('/');
       } else {
         console.error('로그아웃 실패');
       }

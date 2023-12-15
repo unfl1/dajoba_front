@@ -1,14 +1,13 @@
 //global footer
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return(
     <div className=" pt-4 pb-4 pl-24 text-sm bg-gray-100">
       <ul className="container flex gap-10">
         <li>DAJOBA Inc</li>
-        <li>개인정보</li> 
-        <li>취급방침</li>
-        <li>이용약관</li>
-        <li>고객센터</li>
+        <Link to ="PrivacyPolicyPage"><li>개인정보</li></Link>
+        <Link to ="TermsOfUsePage"><li>이용약관</li></Link>
       </ul>
       <div>
         <div>웹사이트 제공자: TABA07 Korea, private unlimited company | 연락처: 010-1234-5678</div>
