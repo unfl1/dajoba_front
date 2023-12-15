@@ -13,8 +13,9 @@ function Recruitment() {
                 <div className="ml-12 mr-12 pt-4 ">
                     <Board2 />
                 </div>                
-            </div>
+                
             <Footer />
+            </div>
         </div>
     );
 }

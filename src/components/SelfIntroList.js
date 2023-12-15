@@ -4,6 +4,10 @@ import API_BASE_URL from '../Config';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import detailImg from '../assets/상세.png'
+import deleteImg from '../assets/삭제.png'
+import analyzeImg from '../assets/분석.png'
+
 function SelfIntroList() {
   const [intros, setIntros] = useState([]);  // 자기소개서 목록을 저장할 상태
   const [page, setPage] = useState(1);       // 현재 페이지
@@ -61,6 +65,12 @@ function SelfIntroList() {
     }
   };
 
+  const handleDetail = (introId) => {
+    navigate(`/Mycoverletter/${introId}`);
+  };
+
+
+
   // 자기소개서 목록 렌더링 함수
   const renderIntros = () => {
     return intros.map((selfIntro, index) => (
@@ -68,7 +78,7 @@ function SelfIntroList() {
         <td className="border px-4 py-2">{selfIntro.introName}</td>
         <td className="border px-4 py-2">{selfIntro.lastUpdated}</td>
         <td className="border px-4 py-2">
-          <a href={`/Mycoverletter/${selfIntro.introId}`}>
+          {/* <a href={`/Mycoverletter/${selfIntro.introId}`}>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               상세보기
             </button>
@@ -88,7 +98,31 @@ function SelfIntroList() {
             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
             분석시작
-          </button>
+          </button> */}
+
+          <div className="flex flex-row items-center justify-center">
+            <button
+              onClick={() => handleDetail(selfIntro.introId)}
+              className=" hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
+              <img src={detailImg} alt="상세보기" />
+
+            </button>
+
+            <button
+              onClick={() => handleDelete(selfIntro.introId)}
+              className=" hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
+            >
+              <img src={deleteImg} alt="삭제" />
+            </button>
+
+            <button
+              onClick={() => navigateToAnalyze(selfIntro.introId)}
+              className=" hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
+            >
+              <img src={analyzeImg} alt=" " />
+
+            </button>
+          </div>
         </td>
       </tr>
     ));
@@ -99,7 +133,7 @@ function SelfIntroList() {
       <div className="flex items-center justify-end mb-6">
         <Link to="/Newcoverletter">
           <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
-            글쓰기
+            자기소개서 작성
           </button>
         </Link>
       </div>
@@ -108,9 +142,13 @@ function SelfIntroList() {
           <tr>
             <th className="px-4 py-2">제목</th>
             <th className="px-4 py-2">작성일</th>
-            <th className="px-4 py-2">상세보기</th>
-            <th className="px-4 py-2">삭제</th>
-            <th className="px-4 py-2">분석시작</th>
+            <th className="px-4 py-2 ">
+              <span className="text-blue-500">상세보기</span>
+              <span className="mx-2"> </span>
+              <span className="text-red-500">삭제</span>
+              <span className="mx-2"> </span>
+              <span className="text-green-500">분석시작</span>
+            </th>
           </tr>
         </thead>
         <tbody>

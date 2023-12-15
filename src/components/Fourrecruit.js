@@ -25,7 +25,7 @@ function Fourrecruit() {
     const colors = ['text-red-300', 'text-blue-300', 'text-green-300', 'text-yellow-300', 'text-pink-300', 'text-purple-300', 'text-indigo-300', 'text-teal-300'];
     const intervalId = setInterval(() => {
       setColor(colors[Math.floor(Math.random() * colors.length)]);
-    }, 1500); // 1.5초마다 색상 변경
+    }, 1000); // 1.5초마다 색상 변경
 
     return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 인터벌 해제
   }, []);
@@ -57,7 +57,7 @@ function Fourrecruit() {
             </div>
 
           </div>
-        ))}
+        ))} 
       </div>
     </div>
   );

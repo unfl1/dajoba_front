@@ -79,6 +79,7 @@ function Board2() {
           key={i}
           onClick={() => setPage(i)}
           style={{
+            marginTop: '50px',
             marginRight: '30px',
             color: 'violet',
             backgroundColor: page === i ? '#D8BFD8' : '#E6E6FA',
@@ -101,6 +102,7 @@ function Board2() {
           onClick={handlePrevBtn}
           disabled={page === 1}
           style={{
+            marginTop: '50px',
             marginRight: '30px',
             color: 'black',
             borderRadius: '5px',
@@ -127,6 +129,7 @@ function Board2() {
           onClick={handleNextBtn}
           disabled={page === totalPages}
           style={{
+            marginTop: '50px',
             marginRight: '30px',
             color: 'black',
             borderRadius: '5px',
@@ -157,7 +160,10 @@ function Board2() {
   };
 
   return (
-    <div className="ml-24 mb-20 mr-24 mt-6">
+    <div className="ml-24 mb-20 mr-24 mt-6"
+    style={{
+      paddingTop: '190px'
+    }}>
       {/* 카테고리 선택 옵션 */}
       <div>
         <label
@@ -165,7 +171,7 @@ function Board2() {
           style={{
             paddingTop: '3px',
             marginRight: '15.5px',
-            fontSize: '24px',
+            fontSize: '28px',
             lineHeight: '29px',
             fontWeight: '700',
             color: '#333'
@@ -229,7 +235,7 @@ function Board2() {
                     textAlign: 'center'
                   }}>{job.title}</p>
               </div>
-            </a>
+            </a> 
           </div>
         ))}
       </div>

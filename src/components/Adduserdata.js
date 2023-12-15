@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../Config';
 import { useSelector } from 'react-redux';
+import defalutImage from '../assets/picture1.png';
+import bubble from '../assets/speech-bubbles.svg'
 
 function Adduserdata() {
   const [formData, setFormData] = useState({
     academicBackground: '',
     experience: '',
+    profilePicture: null,
   });
 
   const user = useSelector(state => state.user.user);
@@ -43,10 +46,21 @@ function Adduserdata() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    if (name === 'profilePicture') {
+      // 파일 입력인 경우 파일 객체를 저장합니다.
+      if (event.target.files.length) {
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          [name]: event.target.files[0],
+        }));
+      }
+    } else {
+      // 다른 입력 필드인 경우
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSave = async (event) => {
@@ -59,9 +73,62 @@ function Adduserdata() {
   };
 
   return (
-    <div>
+    <div className=" "  style={{
+      paddingTop: '170px'
+    }}>
       <form onSubmit={handleSave}>
         <div className="mr-24 ml-24 mt-10 mb-4">
+          <div className="text-center mb-12">
+            <div className="inline-block rounded-full overflow-hidden  w-25 h-24 border border-gray-300">
+              {formData.profilePicture ? (
+                <img src={URL.createObjectURL(formData.profilePicture)} alt="Profile" className="w-full h-full object-cover" />
+              ) : (
+                <img src={defalutImage} alt=" " className="w-full h-full object-cover" />
+              )}
+
+            </div>
+            <span className="text-purple-600 font-semibold text-lg">
+                  {user.userid}
+                </span>
+            <div className="mt-6">
+              <input
+                type="file"
+                id="profilePicture"
+                name="profilePicture"
+                accept="image/*"
+                onChange={handleChange}
+                className="hidden"
+              />
+              <label
+                htmlFor="profilePicture"
+                className="cursor-pointer hover:bg-fuchsia-400 text-black py-2 px-7 rounded  border border-gray-300 "
+
+              >
+                프로필 사진 변경
+              </label>
+
+            </div>
+          </div>
+
+          <div class="mb-5 "
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '12px 20px',
+                borderRadius: '12px',
+                backgroundColor: 'hsla(225, 5%, 46%, 0.05)',
+              }}>
+              <img src={bubble} width="51" height="26" alt="경력/학력 추가 안내" />
+              <span class=" pl-4"
+              style={{
+                marginRight: '16px',
+              }}>
+                 나에게 맞는 채용공고를 찾을 수 있게   
+                <strong style={{ color: 'rgba(156, 39, 250, 1)' }}> 학력 / 경력을 추가</strong>하고 
+                <strong style={{ color: 'rgba(156, 39, 250, 1)'}}> 이력서를 완성</strong>해 주세요.
+              </span>
+            </div>
+
           <div className="mb-2 pl-4">* 최종학력</div>
           <select
             id="academicBackground"
@@ -107,3 +174,4 @@ function Adduserdata() {
 }
 
 export default Adduserdata;
+

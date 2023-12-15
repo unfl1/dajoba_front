@@ -17,7 +17,16 @@ function Nav() {
   const currentYear = new Date().getFullYear(); // Get the current year dynamically
 
   return (
-    <div className="mb-5">
+    <div className="mb-5" style={{
+
+
+      position: 'fixed', // 상단에 고정
+      top: 0, // 상단에서 0px 위치
+      width: '100%', // 너비 100%
+      height: '21%',
+      zIndex: 1000, // 다른 요소들 위에 위치
+      backgroundColor: 'white', // 배경색 지정, 필요에 따라 변경 가능
+    }}>
       <div className="max-w-screen-xl flex flex-wrap items-center p-4 gap-5 ml-20 mt-5 pl-10">
         <Link to="/">
           <img src={logo2} alt="" className="h-10 inline" />
@@ -30,13 +39,13 @@ function Nav() {
       </div>
       <div className="flex md:flex md:justify-between">
         <ul className="flex gap-10 mt-4 ml-20 pl-10">
-        <Link to="/Recruitment">
-          <li className="relative group font-medium hover:text-pink-400">
-            <div className="absolute -top-4 text-xs font-semibold text-pink-500 group-hover:text-pink-400">
-              {currentYear}
-            </div>
-            채용
-          </li>
+          <Link to="/Recruitment">
+            <li className="relative group font-medium hover:text-pink-400">
+              <div className="absolute -top-4 text-xs font-semibold text-pink-500 group-hover:text-pink-400">
+                {currentYear}
+              </div>
+              채용
+            </li>
           </Link>
           <Link to="/Coverletterlist">
             <li className="font-medium hover:text-pink-400">자기소개서</li>

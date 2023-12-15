@@ -66,6 +66,10 @@ const Board3 = () => {
     setIntroContent(event.target.value || '');
   };
 
+  const handleSelfSave = async () => {
+    alert('저장되었습니다.');
+  };
+
   const handleSave = async (event) => {
     event.preventDefault(); // 기본 폼 제출 동작 방지
     try {
@@ -85,6 +89,8 @@ const Board3 = () => {
       setIntroName(introName);
       setIntroContent(introContent);
       setDesireField(desireField);
+
+      handleSelfSave();
     } catch (error) {
       console.error('데이터 업데이트 중 오류 발생:', error);
       // 여기서 오류를 처리하고 표시할 수 있습니다.
@@ -148,8 +154,9 @@ const Board3 = () => {
             <button
               type="submit"
               className="hover:shadow-form rounded-md bg-purple-500 py-3 px-8 text-base font-semibold text-white outline-none"
-            >
+            
               저장
+            >
             </button>
           </div>
         </form>

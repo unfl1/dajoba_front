@@ -8,7 +8,10 @@ function Projectintroduce() {
     return(
         <div>
             <Nav />
-            <div>간단한 프로젝트 소개 페이지</div>
+            <div
+             style={{
+                paddingTop: '170px'
+              }}>간단한 프로젝트 소개 페이지</div>
             <Footer />
         </div>
     );

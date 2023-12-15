@@ -38,7 +38,10 @@ const Recruitmentdetailroute = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4"
+      style={{
+        paddingTop: '190px'
+      }}>
       <div className="flex flex-col items-center">
         <img src={data.titleImg} alt="Title" className="w-full md:w-1/2 rounded-lg shadow-lg" />
         <h1 className="text-2xl font-bold text-center mt-4">{data.title}</h1>
@@ -77,16 +80,16 @@ const Recruitmentdetailroute = () => {
               textAlign: 'center',
               marginRight: '300px',
               marginLeft: '300px',
-              
-              
+
+
             }}>
               {showFullIntro ? (
-                <span style={{ fontSize: '14px', fontFamily: 'inherit', color: 'black'}}>
+                <span style={{ fontSize: '14px', fontFamily: 'inherit', color: 'black' }}>
                   {data.groupIntro}
                 </span>
               ) : (
                 data.groupIntro && (
-                  <span style={{ fontSize: '14px', fontFamily: 'inherit', color: 'black'}}>
+                  <span style={{ fontSize: '14px', fontFamily: 'inherit', color: 'black' }}>
                     {`${data.groupIntro.substring(0, 100)}...`}
                   </span>
                 )

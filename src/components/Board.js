@@ -50,28 +50,30 @@ const Board = () => {
   };
 
   const handleSave = async () => {
-  try {
-    // 데이터를 객체로 묶어서 전송
-    const postData = new URLSearchParams({
-      introName: introName,
-      introContent: introContent,
-      desireField: desireField,
-    });
+    try {
+      // 데이터를 객체로 묶어서 전송
+      const postData = new URLSearchParams({
+        introName: introName,
+        introContent: introContent,
+        desireField: desireField,
+      });
 
-    // Axios를 사용하여 데이터 전송 (userId를 URL에 포함)
-    const response = await axios.post(`${API_BASE_URL}users/${user.userid}/selfintro`, postData);
+      // Axios를 사용하여 데이터 전송 (userId를 URL에 포함)
+      const response = await axios.post(`${API_BASE_URL}users/${user.userid}/selfintro`, postData);
 
-    console.log('데이터가 성공적으로 전송되었습니다.', response.data);
+      console.log('데이터가 성공적으로 전송되었습니다.', response.data);
 
-    // 백엔드에서 반환된 자기소개서 ID를 이용하여 경로 이동
-    navigate(`/Mycoverletter/${response.data}`);
-  } catch (error) {
-    console.error('데이터 전송 중 오류 발생:', error);
-  }
-};
+      // 백엔드에서 반환된 자기소개서 ID를 이용하여 경로 이동
+      navigate(`/Mycoverletter/${response.data}`);
+    } catch (error) {
+      console.error('데이터 전송 중 오류 발생:', error);
+    }
+  };
 
   return (
-    <div className="flex items-center justify-center p-12">
+    <div className="flex items-center justify-center p-12" style={{
+      paddingTop: '190px'
+    }}> 
       <div className="mx-auto w-full max-w-[960px]">
         <form>
           <div className="mb-6">
