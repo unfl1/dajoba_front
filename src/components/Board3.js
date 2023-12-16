@@ -154,9 +154,8 @@ const Board3 = () => {
             <button
               type="submit"
               className="hover:shadow-form rounded-md bg-purple-500 py-3 px-8 text-base font-semibold text-white outline-none"
-            
-              저장
             >
+              저장
             </button>
           </div>
         </form>
