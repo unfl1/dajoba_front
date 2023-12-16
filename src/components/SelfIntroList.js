@@ -25,7 +25,7 @@ function SelfIntroList() {
   // useCallback을 사용하여 fetchIntros 함수 메모이제이션
   const fetchIntros = useCallback(async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}users/${user.userid}/selfintro/list`, {
+      const response = await axios.get(`${API_BASE_URL}/users/${user.userid}/selfintro/list`, {
         params: {
           page: page - 1,
           size: pageSize,
@@ -56,7 +56,7 @@ function SelfIntroList() {
   // 자기소개서 삭제 함수
   const handleDelete = async (introId) => {
     try {
-      await axios.delete(`${API_BASE_URL}users/${user.userid}/selfintro/${introId}`);
+      await axios.delete(`${API_BASE_URL}/users/${user.userid}/selfintro/${introId}`);
       alert('삭제되었습니다.');
       fetchIntros();  // 목록을 다시 불러옵니다.
     } catch (error) {

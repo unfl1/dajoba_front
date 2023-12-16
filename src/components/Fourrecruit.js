@@ -8,7 +8,7 @@ function Fourrecruit() {
 
   useEffect(() => {
     // 채용 데이터 가져오기
-    axios.get(`${API_BASE_URL}jobs/latest`)
+    axios.get(`${API_BASE_URL}/jobs/latest`)
       .then((response) => {
         const jobData = response.data.map(job => ({
           title: job.title,

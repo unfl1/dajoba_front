@@ -15,7 +15,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
   
-    const apiUrl = `${API_BASE_URL}login`;
+    const apiUrl = `${API_BASE_URL}/login`;
   
     try {
       const response = await axios.post(apiUrl);

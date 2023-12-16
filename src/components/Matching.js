@@ -41,7 +41,7 @@ function Matching() {
   const fetchData = useCallback(async () => {
     try {
       const numericIntroId = Number(introid);
-      const response = await axios.get(`${API_BASE_URL}users/${user.userid}/match/${numericIntroId}`);
+      const response = await axios.get(`${API_BASE_URL}/users/${user.userid}/match/${numericIntroId}`);
       setData(response.data.matchLists || []); // 서버 응답 데이터 중 matchLists 배열을 상태에 저장
     } catch (error) {
       console.error('Error fetching data:', error);

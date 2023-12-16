@@ -59,7 +59,7 @@ const Board = () => {
       });
 
       // Axios를 사용하여 데이터 전송 (userId를 URL에 포함)
-      const response = await axios.post(`${API_BASE_URL}users/${user.userid}/selfintro`, postData);
+      const response = await axios.post(`${API_BASE_URL}/users/${user.userid}/selfintro`, postData);
 
       console.log('데이터가 성공적으로 전송되었습니다.', response.data);
 

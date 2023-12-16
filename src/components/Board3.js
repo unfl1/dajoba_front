@@ -17,7 +17,7 @@ const Board3 = () => {
       try {
         // introid를 숫자로 변환하여 요청
         const numericIntroId = Number(introid);
-        const response = await axios.get(`${API_BASE_URL}users/${user.userid}/selfintro/${numericIntroId}`);
+        const response = await axios.get(`${API_BASE_URL}/users/${user.userid}/selfintro/${numericIntroId}`);
         const data = response.data;
         setIntroName(data.introName || '');
         setIntroContent(data.introContent || '');
@@ -80,7 +80,7 @@ const Board3 = () => {
         desireField,
       });
   
-      await axios.put(`${API_BASE_URL}users/${user.userid}/selfintro/${introid}`, putData);
+      await axios.put(`${API_BASE_URL}/users/${user.userid}/selfintro/${introid}`, putData);
       console.log('데이터가 성공적으로 업데이트되었습니다.');
       
       // 데이터를 저장한 후에 상태(state)를 업데이트하여 현재 페이지를 그대로 유지합니다.

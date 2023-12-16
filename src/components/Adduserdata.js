@@ -15,7 +15,7 @@ function Adduserdata() {
   const user = useSelector(state => state.user.user);
 
   useEffect(() => {
-    axios.get(`${API_BASE_URL}users/${user.userid}/extrainfo`)
+    axios.get(`${API_BASE_URL}/users/${user.userid}/extrainfo`)
       .then((response) => {
         setFormData({
           academicBackground: response.data.academicBackground || '',
@@ -67,7 +67,7 @@ function Adduserdata() {
     event.preventDefault();
     const postData = new URLSearchParams(formData);
 
-    await axios.post(`${API_BASE_URL}users/${user.userid}/extrainfo`, postData);
+    await axios.post(`${API_BASE_URL}/users/${user.userid}/extrainfo`, postData);
 
     // 성공 메시지나 리디렉션 등을 수행할 수 있습니다.
   };

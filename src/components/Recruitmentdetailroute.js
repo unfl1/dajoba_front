@@ -12,7 +12,7 @@ const Recruitmentdetailroute = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}jobs/detail/${id}`);
+        const response = await fetch(`${API_BASE_URL}/jobs/detail/${id}`);
         const result = await response.json();
         setData(result);
         setLoading(false);

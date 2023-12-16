@@ -29,7 +29,7 @@ function Account() {
   const handleSignUp = async (e) => {
     e.preventDefault();
   
-    const apiUrl = `${API_BASE_URL}signup`;
+    const apiUrl = `${API_BASE_URL}/signup`;
   
     const userData = new URLSearchParams({
       userId: formData.userId,

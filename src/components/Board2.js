@@ -40,7 +40,7 @@ function Board2() {
 
 
   useEffect(() => {
-    const categoryURL = `${API_BASE_URL}jobs/${selectedCategory}`
+    const categoryURL = `${API_BASE_URL}/jobs/${selectedCategory}`
     axios.get(categoryURL, {
       params: {
         page: page - 1,
