@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../Config';
+import { Link } from 'react-router-dom';
 
 function Board2() {
   const [jobs, setJobs] = useState([]);
@@ -223,19 +224,15 @@ function Board2() {
       <div className="grid grid-cols-4 mt-5 pt-6 gap-5">
         {jobs.map((job, index) => (
           <div key={index} className="max-w-sm rounded overflow-hidden shadow-lg">
-            <a href={`/Recruitment/detail/${job.id}`} target="_blank" rel="noopener noreferrer">
-              <img className="w-full"
-                style={{
-
-
-                }} src={job.titleImg} alt={job.title} />
+            <Link to={`/Recruitment/detail/${job.id}`}>
+              <img className="w-full" src={job.titleImg} alt={job.title} />
               <div className="px-6 py-4">
                 <p className="font-bold text-1/2 mb-2"
                   style={{
                     textAlign: 'center'
                   }}>{job.title}</p>
               </div>
-            </a> 
+            </ Link> 
           </div>
         ))}
       </div>

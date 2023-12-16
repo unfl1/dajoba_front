@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../Config';
+import { Link } from 'react-router-dom';
 
 function Fourrecruit() {
   const [jobs, setJobs] = useState([]);
@@ -37,7 +38,7 @@ function Fourrecruit() {
         {jobs.map((job, index) => (
           <div key={index}>
             <div>
-              <a href={`/Recruitment/detail/${job.id}`} target="_blank" rel="noopener noreferrer">
+            <Link to={`/Recruitment/detail/${job.id}`}>
                 <img className="w-full"
                   style={{
                     borderRadius: '5px',
@@ -53,7 +54,7 @@ function Fourrecruit() {
                     textAlign: 'center'
                     
                   }}>{job.title}</p>
-              </a>
+              </ Link>
             </div>
 
           </div>

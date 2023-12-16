@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import API_BASE_URL from '../Config';
 import Piechart from '../components/Piechart';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const spinAnimation = `@keyframes spin {
   0% { transform: rotate(0deg); }
@@ -118,10 +119,10 @@ function Matching() {
                 </div>
               </div>
               <div className="col-span-1 flex justify-center items-center">
-                <a href={`/Recruitment/detail/${item.jobPostingId}`} target="_blank" rel="noopener noreferrer"
+                <Link to={`/Recruitment/detail/${item.jobPostingId}`}
                   className="bg-sky-200 hover:bg-rose-200 font-bold text-gray-500 py-2 px-4 rounded shadow-lg hover:shadow-xl transition duration-300">
                   채용 상세보기
-                </a>
+                </Link>
               </div>
 
             </div>
@@ -130,7 +131,7 @@ function Matching() {
 
       ) : (
         <div className="text-center" style={{ paddingTop: '230px' }}>
-          
+
           <p>매칭 결과를 조회중입니다. 잠시만 기다려 주세요.</p>
           <Spinner />
         </div>

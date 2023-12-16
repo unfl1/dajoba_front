@@ -14,7 +14,7 @@ import Recruitment from './pages/Recruitment';
 import Projectintroduce from './pages/Projectintroduce';
 import Analyze from './pages/Analyze';
 import Notfoundpage from './pages/Notfoundpage';
-import RecruitmentDetail from './pages/Recruitmentdetail';
+import Recruitmentdetail from './pages/Recruitmentdetail';
 import Mycoverletter from './pages/Mycoverletter';
 import TermsOfUsePage from './pages/TermsOfUsePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
@@ -44,7 +44,7 @@ function App() {
               </Protectedroute>
             } />
             <Route path="Recruitment" element={<Recruitment />} />
-            <Route path="Recruitment/Detail/:id" element={<RecruitmentDetail />} />
+            <Route path="Recruitment/detail/:id" element={<Recruitmentdetail />} />
             <Route path="Projectintroduce" element={<Projectintroduce />} />
             <Route path="Analyze/:introid" element={<Analyze />} />
             <Route path="Notfoundpage" element={<Notfoundpage />} />
