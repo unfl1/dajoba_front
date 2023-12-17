@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "./static/css/main.a96fa8d8.css",
+    "main.js": "./static/js/main.368e894f.js",
+    "static/media/logo2.png": "./static/media/logo2.ca1058e149f8cac51393.png",
+    "static/media/Dajoba소개.png": "./static/media/Dajoba소개.0a3e6f2e961b7e39b2d0.png",
+    "static/media/Ai소개.png": "./static/media/Ai소개.292f28fd2f6dd9c37be4.png",
+    "static/media/intro.png": "./static/media/intro.c58a16d00b44263926a6.png",
+    "static/media/결과.png": "./static/media/결과.6a053568810afec147ef.png",
+    "static/media/taba.png": "./static/media/taba.b5b2188e515fdd2e9a24.png",
+    "static/media/picture1.png": "./static/media/picture1.e84013bc1fb8fe943a3b.png",
+    "static/media/speech-bubbles.svg": "./static/media/speech-bubbles.b11d9cd856f37e996654eaa437ad09c9.svg",
+    "index.html": "./index.html",
+    "main.a96fa8d8.css.map": "./static/css/main.a96fa8d8.css.map",
+    "main.368e894f.js.map": "./static/js/main.368e894f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a96fa8d8.css",
+    "static/js/main.368e894f.js"
+  ]
+}
